@@ -1,3 +1,5 @@
+import json
+
 class Cell:
 
     def __init__(self):
@@ -45,7 +47,6 @@ class Board:
 
     def update(self):
 
-        self.rules()
         for row in range(len(self.board)):
             for col in range(len(self.board)):
                 if self.states[row][col] == "alive": self.board[row][col].set_alive()
@@ -55,3 +56,20 @@ class Board:
         
         self.board = [[Cell() for cell in range(self.size)] for cell in range(self.size)]
         self.states = [[None for state in range(self.size)] for state in range(self.size)]
+
+    def save(self, filename):
+        board_states = []
+
+        for i in range(len(self.board)):
+            board_states.append([])
+            for j in range(len(self.board)):
+                board_states[-1].append(self.board[i][j].state)
+
+        with open("shapes.json", "r") as file:
+            data = json.load(file)
+            data[filename] = board_states
+            
+        with open("shapes.json", "w") as file:
+            data[filename] = board_states
+            json.dump(data, file)
+            file.close
