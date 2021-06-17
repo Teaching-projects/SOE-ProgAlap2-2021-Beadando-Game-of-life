@@ -18,7 +18,7 @@ class GameFrame(Frame):
         for row in range(self.size):
             self.buttons.append([])
             for col in range(self.size):
-                button = Button(self, width = 2, height = 1, bg = "black", command = lambda row = row, col = col: self.clicked(row, col))
+                button = Button(self, width = 2, height = 2, bg = "black", command = lambda row = row, col = col: self.clicked(row, col))
                 self.buttons[-1].append(button)
                 self.buttons[row][col].grid(row = row, column = col)
 
